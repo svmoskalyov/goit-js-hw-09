@@ -15,15 +15,18 @@ flatpickr(choseDate, {
   onClose(selectedDates) {
     //   console.log(selectedDates[0]);
     if (selectedDates[0] < Date.now()) {
-      console.log('date is bad');
-      return window.alert('Please choose a date in the future');
+      // console.log('date is bad');
+      return Notify.failure('Дата вибрана в минулому!', {
+        position: 'center-center',
+      });
     }
 
     buttonStart.disabled = false;
     buttonStart.addEventListener('click', () => {
       const timer = new Timer('.timer', selectedDates[0]);
       timer.start();
-      console.log('timer is start');
+      // console.log('timer is start');
+      Notify.success('Відлік почався!', { position: 'center-center' });
     });
   },
 });
@@ -58,7 +61,8 @@ class Timer {
       });
 
       if (diff < 1000) {
-        console.log('time is over');
+        // console.log('time is over');
+        Notify.success('Відлік закінчівся!', { position: 'center-center' });
         clearInterval(this.#intervalId);
       }
     }, 1000);
