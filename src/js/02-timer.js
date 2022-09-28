@@ -23,10 +23,6 @@ flatpickr(choseDate, {
 
     buttonStart.disabled = false;
     buttonStart.addEventListener('click', () => {
-      if (!buttonStart.disabled) {
-        return;
-      }
-
       const timer = new Timer('.timer', selectedDates[0]);
       timer.start();
       // console.log('timer is start');
