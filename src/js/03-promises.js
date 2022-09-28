@@ -15,12 +15,12 @@ function onFormSubmit(e) {
     createPromise(i, inDelay)
       .then(({ position, delay }) => {
         setTimeout(() => {
-          console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         }, delay);
       })
       .catch(({ position, delay }) => {
         setTimeout(() => {
-          console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         }, delay);
       });
     inDelay += inStep;
