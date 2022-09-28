@@ -29,10 +29,12 @@ function onFormSubmit(e) {
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
+  const positionDalay = { position, delay };
+
   return new Promise((resolve, reject) => {
     if (shouldResolve) {
-      resolve({ position, delay });
+      resolve(positionDalay);
     }
-    reject({ position, delay });
+    reject(positionDalay);
   });
 }
