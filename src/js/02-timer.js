@@ -27,6 +27,7 @@ flatpickr(choseDate, {
       timer.start();
       // console.log('timer is start');
       Notify.success('Відлік почався!', { position: 'center-center' });
+      buttonStart.disabled = true;
     });
   },
 });
