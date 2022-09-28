@@ -12,17 +12,7 @@ function onFormSubmit(e) {
   const inAmount = +amount.value;
 
   for (let i = 1; i <= inAmount; i += 1) {
-    createPromise(i, inDelay)
-      .then(({ position, delay }) => {
-        setTimeout(() => {
-          Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-        }, delay);
-      })
-      .catch(({ position, delay }) => {
-        setTimeout(() => {
-          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-        }, delay);
-      });
+    createPromise(i, inDelay).then(onSuccess).catch(onError);
     inDelay += inStep;
   }
 }
@@ -32,9 +22,19 @@ function createPromise(position, delay) {
   const positionDalay = { position, delay };
 
   return new Promise((resolve, reject) => {
-    if (shouldResolve) {
-      resolve(positionDalay);
-    }
-    reject(positionDalay);
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve(positionDalay);
+      }
+      reject(positionDalay);
+    }, delay);
   });
+}
+
+function onSuccess({ position, delay }) {
+  Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+}
+
+function onError({ position, delay }) {
+  Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 }
